@@ -240,3 +240,107 @@ func TestPanic(t *testing.T) {
 		})
 	}
 }
+
+func TestUnique(t *testing.T) {
+	p1 := person{"John", 20, []hobby{{"Guitar", "Music"}, {"Programming", "Tech"}}}
+	p2 := person{"John", 20, []hobby{{"Guitar", "Music"}, {"Programming", "Tech"}}}
+	tests := []struct {
+		a    []any
+		pass bool
+	}{
+		{[]any{1, 2, 3}, true},
+		{[]any{1, 2, 3, 1}, false},
+		{[]any{p1, p2}, false},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.Unique(test.a) != test.pass {
+				fail(t, fmt.Sprintf("Unique(%v) != %v", test.a, test.pass))
+			}
+		})
+	}
+}
+
+func TestContains(t *testing.T) {
+	tests := []struct {
+		a    []any
+		b    any
+		pass bool
+	}{
+		{[]any{1, 2, 3}, 1, true},
+		{[]any{1, 2, 3}, 4, false},
+		{[]any{"a", "b", "c"}, "a", true},
+		{[]any{"a", "b", "c"}, "d", false},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.Contains(test.a, test.b) != test.pass {
+				fail(t, fmt.Sprintf("Contains(%v, %v) != %v", test.a, test.b, test.pass))
+			}
+		})
+	}
+}
+
+func TestContainsAll(t *testing.T) {
+	tests := []struct {
+		a    []any
+		b    []any
+		pass bool
+	}{
+		{[]any{1, 2, 3}, []any{1, 2}, true},
+		{[]any{1, 2, 3}, []any{1, 4}, false},
+		{[]any{"a", "b", "c"}, []any{"a", "b"}, true},
+		{[]any{"a", "b", "c"}, []any{"a", "d"}, false},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.ContainsAll(test.a, test.b) != test.pass {
+				fail(t, fmt.Sprintf("ContainsAll(%v, %v) != %v", test.a, test.b, test.pass))
+			}
+		})
+	}
+}
+
+func TestContainsAny(t *testing.T) {
+	tests := []struct {
+		a    []any
+		b    []any
+		pass bool
+	}{
+		{[]any{1, 2, 3}, []any{1, 2}, true},
+		{[]any{1, 2, 3}, []any{1, 4}, true},
+		{[]any{1, 2, 3}, []any{4, 5}, false},
+		{[]any{"a", "b", "c"}, []any{"a", "b"}, true},
+		{[]any{"a", "b", "c"}, []any{"a", "d"}, true},
+		{[]any{"a", "b", "c"}, []any{"d", "e"}, false},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.ContainsAny(test.a, test.b) != test.pass {
+				fail(t, fmt.Sprintf("ContainsAny(%v, %v) != %v", test.a, test.b, test.pass))
+			}
+		})
+	}
+}
+
+func TestContainsNone(t *testing.T) {
+	tests := []struct {
+		a    []any
+		b    []any
+		pass bool
+	}{
+		{[]any{1, 2, 3}, []any{1, 2}, false},
+		{[]any{1, 2, 3}, []any{1, 4}, false},
+		{[]any{1, 2, 3}, []any{4, 5}, true},
+		{[]any{"a", "b", "c"}, []any{"a", "b"}, false},
+		{[]any{"a", "b", "c"}, []any{"a", "d"}, false},
+		{[]any{"a", "b", "c"}, []any{"d", "e"}, true},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.ContainsNone(test.a, test.b) != test.pass {
+				fail(t, fmt.Sprintf("ContainsNone(%v, %v) != %v", test.a, test.b, test.pass))
+			}
+		})
+	}
+}

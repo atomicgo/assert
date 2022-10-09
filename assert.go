@@ -80,3 +80,81 @@ func Panic(f func()) (panicked bool) {
 	f()
 	return
 }
+
+// Unique returns true if the slice contains unique values.
+// Items are considered unique if they are not deep equal.
+func Unique[T any](s []T) bool {
+	// Use reflection DeepEqual to compare values.
+	// This is necessary because slices of interfaces cannot be compared with ==.
+	for i := range s {
+		for j := range s {
+			if i != j && reflect.DeepEqual(s[i], s[j]) {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+// Contains returns true if the slice contains the value.
+// Items are considered equal if they are deep equal.
+func Contains[T any](s []T, v T) bool {
+	// Use reflection DeepEqual to compare values.
+	// This is necessary because slices of interfaces cannot be compared with ==.
+	for _, item := range s {
+		if reflect.DeepEqual(item, v) {
+			return true
+		}
+	}
+	return false
+}
+
+// ContainsAll returns true if the slice contains all the values.
+// Items are considered equal if they are deep equal.
+func ContainsAll[T any](s []T, v []T) bool {
+	// Use reflection DeepEqual to compare values.
+	// This is necessary because slices of interfaces cannot be compared with ==.
+	for _, item := range v {
+		found := false
+		for _, item2 := range s {
+			if reflect.DeepEqual(item, item2) {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+	return true
+}
+
+// ContainsAny returns true if the slice contains any of the values.
+// Items are considered equal if they are deep equal.
+func ContainsAny[T any](s []T, v []T) bool {
+	// Use reflection DeepEqual to compare values.
+	// This is necessary because slices of interfaces cannot be compared with ==.
+	for _, item := range v {
+		for _, item2 := range s {
+			if reflect.DeepEqual(item, item2) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// ContainsNone returns true if the slice contains none of the values.
+// Items are considered equal if they are deep equal.
+func ContainsNone[T any](s []T, v []T) bool {
+	// Use reflection DeepEqual to compare values.
+	// This is necessary because slices of interfaces cannot be compared with ==.
+	for _, item := range v {
+		for _, item2 := range s {
+			if reflect.DeepEqual(item, item2) {
+				return false
+			}
+		}
+	}
+	return true
+}
