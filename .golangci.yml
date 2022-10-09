@@ -32,7 +32,6 @@ linters:
     - dupl
     - durationcheck
     - errorlint
-    - exhaustive
     - gci
     - gocognit
     - gocritic

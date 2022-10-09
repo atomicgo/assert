@@ -41,16 +41,6 @@ func Number(a any) bool {
 	return false
 }
 
-// True returns true if the value is true.
-func True(a bool) bool {
-	return a == true
-}
-
-// False returns true if the value is false.
-func False(a bool) bool {
-	return a == false
-}
-
 // Zero returns true if the value is the zero value.
 func Zero(a any) bool {
 	return a == nil || reflect.DeepEqual(a, reflect.Zero(reflect.TypeOf(a)).Interface())

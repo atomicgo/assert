@@ -140,40 +140,6 @@ func TestNumber(t *testing.T) {
 	}
 }
 
-func TestTrue(t *testing.T) {
-	tests := []struct {
-		a    bool
-		pass bool
-	}{
-		{true, true},
-		{false, false},
-	}
-	for i, test := range tests {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			if assert.True(test.a) != test.pass {
-				fail(t, fmt.Sprintf("True(%v) != %v", test.a, test.pass))
-			}
-		})
-	}
-}
-
-func TestFalse(t *testing.T) {
-	tests := []struct {
-		a    bool
-		pass bool
-	}{
-		{true, false},
-		{false, true},
-	}
-	for i, test := range tests {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			if assert.False(test.a) != test.pass {
-				fail(t, fmt.Sprintf("False(%v) != %v", test.a, test.pass))
-			}
-		})
-	}
-}
-
 func TestZero(t *testing.T) {
 	tests := []struct {
 		a    any
