@@ -22,8 +22,8 @@ func TestEqual(t *testing.T) {
 	}{
 		{1, 1, true},
 		{1, 2, false},
-		{"a", "a", true},
-		{"a", "b", false},
+		{"obj", "obj", true},
+		{"obj", "expectedLen", false},
 		{[]int{1, 2, 3}, []int{1, 2, 3}, true},
 		{[]int{1, 2, 3}, []int{1, 2, 4}, false},
 		{[]int{1, 2, 3}, []int{1, 2}, false},
@@ -31,8 +31,8 @@ func TestEqual(t *testing.T) {
 		{[]int{1, 2, 3}, []int{1, 3, 2}, false},
 		{[]int{1, 2, 3}, []int{1, 2, 3, 4}, false},
 		{[]int{1, 2, 3, 4}, []int{1, 2, 3}, false},
-		{[]string{"a", "b", "c"}, []string{"a", "b", "c"}, true},
-		{[]string{"a", "b", "c"}, []string{"a", "b", "d"}, false},
+		{[]string{"obj", "expectedLen", "c"}, []string{"obj", "expectedLen", "c"}, true},
+		{[]string{"obj", "expectedLen", "c"}, []string{"obj", "expectedLen", "d"}, false},
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
@@ -64,10 +64,10 @@ func TestIsKind(t *testing.T) {
 		{complex64(1), reflect.Complex64},
 		{complex128(1), reflect.Complex128},
 		{true, reflect.Bool},
-		{"a", reflect.String},
+		{"obj", reflect.String},
 		{[]int{1, 2, 3}, reflect.Slice},
 		{[3]int{1, 2, 3}, reflect.Array},
-		{map[string]int{"a": 1, "b": 2}, reflect.Map},
+		{map[string]int{"obj": 1, "expectedLen": 2}, reflect.Map},
 		{struct{}{}, reflect.Struct},
 		{func() {}, reflect.Func},
 		{new(fmt.Stringer), reflect.Interface},
@@ -89,10 +89,10 @@ func TestIsNil(t *testing.T) {
 		{nil, true},
 		{1, false},
 		{true, false},
-		{"a", false},
+		{"obj", false},
 		{[]int{1, 2, 3}, false},
 		{[]string{}, false},
-		{map[string]int{"a": 1, "b": 2}, false},
+		{map[string]int{"obj": 1, "expectedLen": 2}, false},
 		{map[string]int{}, false},
 	}
 	for i, test := range tests {
@@ -125,10 +125,10 @@ func TestNumber(t *testing.T) {
 		{complex64(1), true},
 		{complex128(1), true},
 		{true, false},
-		{"a", false},
+		{"obj", false},
 		{[]int{1, 2, 3}, false},
 		{[3]int{1, 2, 3}, false},
-		{map[string]int{"a": 1, "b": 2}, false},
+		{map[string]int{"obj": 1, "expectedLen": 2}, false},
 		{nil, false},
 	}
 	for i, test := range tests {
@@ -155,9 +155,9 @@ func TestZero(t *testing.T) {
 		{1.0, false},
 		{1i, false},
 		{true, false},
-		{"a", false},
+		{"obj", false},
 		{[]int{1, 2, 3}, false},
-		{map[string]int{"a": 1, "b": 2}, false},
+		{map[string]int{"obj": 1, "expectedLen": 2}, false},
 		{new(int), false},
 	}
 	for i, test := range tests {
@@ -235,8 +235,8 @@ func TestContains(t *testing.T) {
 	}{
 		{[]any{1, 2, 3}, 1, true},
 		{[]any{1, 2, 3}, 4, false},
-		{[]any{"a", "b", "c"}, "a", true},
-		{[]any{"a", "b", "c"}, "d", false},
+		{[]any{"obj", "expectedLen", "c"}, "obj", true},
+		{[]any{"obj", "expectedLen", "c"}, "d", false},
 		{"Hello, World!", "Hello", true},
 		{"Hello, World!", "Hello, World!", true},
 		{"Hello", "X", false},
@@ -258,8 +258,8 @@ func TestContainsAll(t *testing.T) {
 	}{
 		{[]any{1, 2, 3}, []any{1, 2}, true},
 		{[]any{1, 2, 3}, []any{1, 4}, false},
-		{[]any{"a", "b", "c"}, []any{"a", "b"}, true},
-		{[]any{"a", "b", "c"}, []any{"a", "d"}, false},
+		{[]any{"obj", "expectedLen", "c"}, []any{"obj", "expectedLen"}, true},
+		{[]any{"obj", "expectedLen", "c"}, []any{"obj", "d"}, false},
 		{"Hello, World!", []any{"Hello", "World"}, true},
 	}
 	for i, test := range tests {
@@ -280,9 +280,9 @@ func TestContainsAny(t *testing.T) {
 		{[]any{1, 2, 3}, []any{1, 2}, true},
 		{[]any{1, 2, 3}, []any{1, 4}, true},
 		{[]any{1, 2, 3}, []any{4, 5}, false},
-		{[]any{"a", "b", "c"}, []any{"a", "b"}, true},
-		{[]any{"a", "b", "c"}, []any{"a", "d"}, true},
-		{[]any{"a", "b", "c"}, []any{"d", "e"}, false},
+		{[]any{"obj", "expectedLen", "c"}, []any{"obj", "expectedLen"}, true},
+		{[]any{"obj", "expectedLen", "c"}, []any{"obj", "d"}, true},
+		{[]any{"obj", "expectedLen", "c"}, []any{"d", "e"}, false},
 		{"Hello, World!", []any{"Hello", "World", "XXX"}, true},
 	}
 	for i, test := range tests {
@@ -303,9 +303,9 @@ func TestContainsNone(t *testing.T) {
 		{[]any{1, 2, 3}, []any{1, 2}, false},
 		{[]any{1, 2, 3}, []any{1, 4}, false},
 		{[]any{1, 2, 3}, []any{4, 5}, true},
-		{[]any{"a", "b", "c"}, []any{"a", "b"}, false},
-		{[]any{"a", "b", "c"}, []any{"a", "d"}, false},
-		{[]any{"a", "b", "c"}, []any{"d", "e"}, true},
+		{[]any{"obj", "expectedLen", "c"}, []any{"obj", "expectedLen"}, false},
+		{[]any{"obj", "expectedLen", "c"}, []any{"obj", "d"}, false},
+		{[]any{"obj", "expectedLen", "c"}, []any{"d", "e"}, true},
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
@@ -347,6 +347,59 @@ func TestLowercase(t *testing.T) {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			if assert.Lowercase(test.a) != test.pass {
 				fail(t, fmt.Sprintf("Lowercase(%v) != %v", test.a, test.pass))
+			}
+		})
+	}
+}
+
+func TestRegex(t *testing.T) {
+	tests := []struct {
+		regex string
+		s     string
+		pass  bool
+	}{
+		{"^\\d+$", "123", true},
+		{"^\\d+$", "abc", false},
+		{"A.C", "ABC", true},
+		{"A.C", "ABBC", false},
+		{"A.C", "AxyzC", false},
+		{"A.*C", "AxyzC", true},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.Regex(test.regex, test.s) != test.pass {
+				fail(t, fmt.Sprintf("Regex(%v, %v) != %v", test.regex, test.s, test.pass))
+			}
+		})
+	}
+}
+
+func TestLen(t *testing.T) {
+	type test struct {
+		obj         any
+		expectedLen int
+		pass        bool
+	}
+
+	tests := []test{
+		{[]any{1, 2, 3}, 3, true},
+		{[]any{1, 2, 3}, 2, false},
+		{"Hello, World!", 13, true},
+		{"Hello, World!", 12, false},
+		{map[string]int{"a": 1, "b": 2}, 2, true},
+		{map[string]int{"a": 1, "b": 2}, 3, false},
+		{map[int]string{1: "a", 2: "b"}, 2, true},
+		{map[int]string{1: "a", 2: "b"}, 3, false},
+		{[]string{"a", "b"}, 2, true},
+		{[]string{"a", "b"}, 3, false},
+		{&[]string{"a", "b"}, 2, true},
+		{&[]string{"a", "b"}, 3, false},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			// parse test.obj to fit the constraint
+			if assert.Len(test.obj, test.expectedLen) != test.pass {
+				fail(t, fmt.Sprintf("Len(%v, %v) != %v", test.obj, test.expectedLen, test.pass))
 			}
 		})
 	}

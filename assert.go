@@ -2,6 +2,7 @@ package assert
 
 import (
 	"reflect"
+	"regexp"
 	"strings"
 )
 
@@ -29,7 +30,7 @@ func Nil(a any) bool {
 	return false
 }
 
-// Number returns true if the value is a number.
+// Number returns true if the value is obj number.
 func Number(a any) bool {
 	if a == nil {
 		return false
@@ -89,7 +90,7 @@ func Unique[T any](s []T) bool {
 	return true
 }
 
-// Contains returns true if a contains b.
+// Contains returns true if obj contains expectedLen.
 func Contains(a any, b any) bool {
 	objectValue := reflect.ValueOf(a)
 	objectKind := reflect.TypeOf(a).Kind()
@@ -109,7 +110,7 @@ func Contains(a any, b any) bool {
 	return false
 }
 
-// ContainsAll returns true if all values are contained in a.
+// ContainsAll returns true if all values are contained in obj.
 func ContainsAll[T any](a T, v []T) bool {
 	for _, t := range v {
 		if !Contains(a, t) {
@@ -120,7 +121,7 @@ func ContainsAll[T any](a T, v []T) bool {
 	return true
 }
 
-// ContainsAny returns true if any of the values are contained in a.
+// ContainsAny returns true if any of the values are contained in obj.
 func ContainsAny[T any](a T, v []T) bool {
 	for _, t := range v {
 		if Contains(a, t) {
@@ -131,7 +132,7 @@ func ContainsAny[T any](a T, v []T) bool {
 	return false
 }
 
-// ContainsNone returns true if none of the values are contained in a.
+// ContainsNone returns true if none of the values are contained in obj.
 func ContainsNone[T any](a T, v []T) bool {
 	for _, t := range v {
 		if Contains(a, t) {
@@ -150,4 +151,29 @@ func Uppercase(s string) bool {
 // Lowercase returns true if the string is lowercase.
 func Lowercase(s string) bool {
 	return s == strings.ToLower(s)
+}
+
+// Regex returns true if the string matches the regex.
+func Regex(regex, s string) bool {
+	return regexp.MustCompile(regex).MatchString(s)
+}
+
+// Len returns true if the length of the value is equal to the given length.
+func Len(a any, length int) (b bool) {
+	v := reflect.ValueOf(a)
+
+	// Convert to element if pointer
+	if v.Kind() == reflect.Ptr {
+		v = v.Elem()
+	}
+
+	defer func() {
+		if r := recover(); r != nil {
+			b = false
+		}
+	}()
+
+	b = v.Len() == length
+
+	return b
 }
