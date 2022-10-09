@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/atomicgo/assert">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-129-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-123-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://opensource.org/licenses/MIT" target="_blank">
@@ -78,18 +78,16 @@ Package assert provides a set of assertion functions.
 - [func ContainsAny[T any](s []T, v []T) bool](<#func-containsany>)
 - [func ContainsNone[T any](s []T, v []T) bool](<#func-containsnone>)
 - [func Equal[T any](a, b T) bool](<#func-equal>)
-- [func False(a bool) bool](<#func-false>)
 - [func Implements(a, iface any) bool](<#func-implements>)
 - [func Kind(a any, kind reflect.Kind) bool](<#func-kind>)
 - [func Nil(a any) bool](<#func-nil>)
 - [func Number(a any) bool](<#func-number>)
 - [func Panic(f func()) (panicked bool)](<#func-panic>)
-- [func True(a bool) bool](<#func-true>)
 - [func Unique[T any](s []T) bool](<#func-unique>)
 - [func Zero(a any) bool](<#func-zero>)
 
 
-## func [Contains](<https://github.com/atomicgo/assert/blob/main/assert.go#L101>)
+## func [Contains](<https://github.com/atomicgo/assert/blob/main/assert.go#L91>)
 
 ```go
 func Contains[T any](s []T, v T) bool
@@ -97,7 +95,7 @@ func Contains[T any](s []T, v T) bool
 
 Contains returns true if the slice contains the value. Items are considered equal if they are deep equal.
 
-## func [ContainsAll](<https://github.com/atomicgo/assert/blob/main/assert.go#L114>)
+## func [ContainsAll](<https://github.com/atomicgo/assert/blob/main/assert.go#L104>)
 
 ```go
 func ContainsAll[T any](s []T, v []T) bool
@@ -105,7 +103,7 @@ func ContainsAll[T any](s []T, v []T) bool
 
 ContainsAll returns true if the slice contains all the values. Items are considered equal if they are deep equal.
 
-## func [ContainsAny](<https://github.com/atomicgo/assert/blob/main/assert.go#L134>)
+## func [ContainsAny](<https://github.com/atomicgo/assert/blob/main/assert.go#L124>)
 
 ```go
 func ContainsAny[T any](s []T, v []T) bool
@@ -113,7 +111,7 @@ func ContainsAny[T any](s []T, v []T) bool
 
 ContainsAny returns true if the slice contains any of the values. Items are considered equal if they are deep equal.
 
-## func [ContainsNone](<https://github.com/atomicgo/assert/blob/main/assert.go#L149>)
+## func [ContainsNone](<https://github.com/atomicgo/assert/blob/main/assert.go#L139>)
 
 ```go
 func ContainsNone[T any](s []T, v []T) bool
@@ -129,15 +127,7 @@ func Equal[T any](a, b T) bool
 
 Equal compares two values and returns true if they are equal.
 
-## func [False](<https://github.com/atomicgo/assert/blob/main/assert.go#L50>)
-
-```go
-func False(a bool) bool
-```
-
-False returns true if the value is false.
-
-## func [Implements](<https://github.com/atomicgo/assert/blob/main/assert.go#L60>)
+## func [Implements](<https://github.com/atomicgo/assert/blob/main/assert.go#L50>)
 
 ```go
 func Implements(a, iface any) bool
@@ -169,7 +159,7 @@ func Number(a any) bool
 
 Number returns true if the value is a number.
 
-## func [Panic](<https://github.com/atomicgo/assert/blob/main/assert.go#L74>)
+## func [Panic](<https://github.com/atomicgo/assert/blob/main/assert.go#L64>)
 
 ```go
 func Panic(f func()) (panicked bool)
@@ -177,15 +167,7 @@ func Panic(f func()) (panicked bool)
 
 Panic returns true if the function panics.
 
-## func [True](<https://github.com/atomicgo/assert/blob/main/assert.go#L45>)
-
-```go
-func True(a bool) bool
-```
-
-True returns true if the value is true.
-
-## func [Unique](<https://github.com/atomicgo/assert/blob/main/assert.go#L86>)
+## func [Unique](<https://github.com/atomicgo/assert/blob/main/assert.go#L76>)
 
 ```go
 func Unique[T any](s []T) bool
@@ -193,7 +175,7 @@ func Unique[T any](s []T) bool
 
 Unique returns true if the slice contains unique values. Items are considered unique if they are not deep equal.
 
-## func [Zero](<https://github.com/atomicgo/assert/blob/main/assert.go#L55>)
+## func [Zero](<https://github.com/atomicgo/assert/blob/main/assert.go#L45>)
 
 ```go
 func Zero(a any) bool
