@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/atomicgo/assert">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-1-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-101-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://opensource.org/licenses/MIT" target="_blank">
@@ -73,16 +73,88 @@ Package assert provides a set of assertion functions.
 
 ## Index
 
-- [func HelloWorld() string](<#func-helloworld>)
+- [func Equal[T any](a, b T) bool](<#func-equal>)
+- [func False(a bool) bool](<#func-false>)
+- [func Implements(a, iface any) bool](<#func-implements>)
+- [func Kind(a any, kind reflect.Kind) bool](<#func-kind>)
+- [func Nil(a any) bool](<#func-nil>)
+- [func Number(a any) bool](<#func-number>)
+- [func Panic(f func()) (panicked bool)](<#func-panic>)
+- [func True(a bool) bool](<#func-true>)
+- [func Zero(a any) bool](<#func-zero>)
 
 
-## func [HelloWorld](<https://github.com/atomicgo/assert/blob/main/assert.go#L4>)
+## func [Equal](<https://github.com/atomicgo/assert/blob/main/assert.go#L6>)
 
 ```go
-func HelloWorld() string
+func Equal[T any](a, b T) bool
 ```
 
-HelloWorld returns \`Hello, World\!\`.
+Equal compares two values and returns true if they are equal.
+
+## func [False](<https://github.com/atomicgo/assert/blob/main/assert.go#L50>)
+
+```go
+func False(a bool) bool
+```
+
+False returns true if the value is false.
+
+## func [Implements](<https://github.com/atomicgo/assert/blob/main/assert.go#L60>)
+
+```go
+func Implements(a, iface any) bool
+```
+
+Implements returns true if the value implements the interface.
+
+## func [Kind](<https://github.com/atomicgo/assert/blob/main/assert.go#L11>)
+
+```go
+func Kind(a any, kind reflect.Kind) bool
+```
+
+Kind returns true if the value is of the given kind.
+
+## func [Nil](<https://github.com/atomicgo/assert/blob/main/assert.go#L16>)
+
+```go
+func Nil(a any) bool
+```
+
+Nil returns true if the value is nil.
+
+## func [Number](<https://github.com/atomicgo/assert/blob/main/assert.go#L30>)
+
+```go
+func Number(a any) bool
+```
+
+Number returns true if the value is a number.
+
+## func [Panic](<https://github.com/atomicgo/assert/blob/main/assert.go#L74>)
+
+```go
+func Panic(f func()) (panicked bool)
+```
+
+Panic returns true if the function panics.
+
+## func [True](<https://github.com/atomicgo/assert/blob/main/assert.go#L45>)
+
+```go
+func True(a bool) bool
+```
+
+True returns true if the value is true.
+
+## func [Zero](<https://github.com/atomicgo/assert/blob/main/assert.go#L55>)
+
+```go
+func Zero(a any) bool
+```
+
+Zero returns true if the value is the zero value.
 
 
 
