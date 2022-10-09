@@ -1,6 +1,9 @@
 package assert
 
-import "reflect"
+import (
+	"reflect"
+	"strings"
+)
 
 // Equal compares two values and returns true if they are equal.
 func Equal[T any](a, b T) bool {
@@ -86,65 +89,65 @@ func Unique[T any](s []T) bool {
 	return true
 }
 
-// Contains returns true if the slice contains the value.
-// Items are considered equal if they are deep equal.
-func Contains[T any](s []T, v T) bool {
-	// Use reflection DeepEqual to compare values.
-	// This is necessary because slices of interfaces cannot be compared with ==.
-	for _, item := range s {
-		if reflect.DeepEqual(item, v) {
-			return true
-		}
-	}
-	return false
-}
+// Contains returns true if a contains b.
+func Contains(a any, b any) bool {
+	objectValue := reflect.ValueOf(a)
+	objectKind := reflect.TypeOf(a).Kind()
 
-// ContainsAll returns true if the slice contains all the values.
-// Items are considered equal if they are deep equal.
-func ContainsAll[T any](s []T, v []T) bool {
-	// Use reflection DeepEqual to compare values.
-	// This is necessary because slices of interfaces cannot be compared with ==.
-	for _, item := range v {
-		found := false
-		for _, item2 := range s {
-			if reflect.DeepEqual(item, item2) {
-				found = true
-				break
-			}
-		}
-		if !found {
-			return false
-		}
-	}
-	return true
-}
-
-// ContainsAny returns true if the slice contains any of the values.
-// Items are considered equal if they are deep equal.
-func ContainsAny[T any](s []T, v []T) bool {
-	// Use reflection DeepEqual to compare values.
-	// This is necessary because slices of interfaces cannot be compared with ==.
-	for _, item := range v {
-		for _, item2 := range s {
-			if reflect.DeepEqual(item, item2) {
+	switch objectKind {
+	case reflect.String:
+		return strings.Contains(objectValue.String(), reflect.ValueOf(b).String())
+	case reflect.Map:
+	default:
+		for i := 0; i < objectValue.Len(); i++ {
+			if Equal(objectValue.Index(i).Interface(), b) {
 				return true
 			}
 		}
 	}
+
 	return false
 }
 
-// ContainsNone returns true if the slice contains none of the values.
-// Items are considered equal if they are deep equal.
-func ContainsNone[T any](s []T, v []T) bool {
-	// Use reflection DeepEqual to compare values.
-	// This is necessary because slices of interfaces cannot be compared with ==.
-	for _, item := range v {
-		for _, item2 := range s {
-			if reflect.DeepEqual(item, item2) {
-				return false
-			}
+// ContainsAll returns true if all values are contained in a.
+func ContainsAll[T any](a T, v []T) bool {
+	for _, t := range v {
+		if !Contains(a, t) {
+			return false
 		}
 	}
+
 	return true
+}
+
+// ContainsAny returns true if any of the values are contained in a.
+func ContainsAny[T any](a T, v []T) bool {
+	for _, t := range v {
+		if Contains(a, t) {
+			return true
+		}
+	}
+
+	return false
+}
+
+// ContainsNone returns true if none of the values are contained in a.
+func ContainsNone[T any](a T, v []T) bool {
+	for _, t := range v {
+		if Contains(a, t) {
+			return false
+		}
+	}
+
+	return true
+}
+
+// Uppercase returns true if the string is uppercase.
+func Uppercase(s string) bool {
+	return s == strings.ToUpper(s)
+}
+
+// Lowercase returns true if the string is lowercase.
+func Lowercase(s string) bool {
+	return s == strings.ToLower(s)
 }

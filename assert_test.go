@@ -229,7 +229,7 @@ func TestUnique(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	tests := []struct {
-		a    []any
+		a    any
 		b    any
 		pass bool
 	}{
@@ -237,6 +237,9 @@ func TestContains(t *testing.T) {
 		{[]any{1, 2, 3}, 4, false},
 		{[]any{"a", "b", "c"}, "a", true},
 		{[]any{"a", "b", "c"}, "d", false},
+		{"Hello, World!", "Hello", true},
+		{"Hello, World!", "Hello, World!", true},
+		{"Hello", "X", false},
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
@@ -249,7 +252,7 @@ func TestContains(t *testing.T) {
 
 func TestContainsAll(t *testing.T) {
 	tests := []struct {
-		a    []any
+		a    any
 		b    []any
 		pass bool
 	}{
@@ -257,6 +260,7 @@ func TestContainsAll(t *testing.T) {
 		{[]any{1, 2, 3}, []any{1, 4}, false},
 		{[]any{"a", "b", "c"}, []any{"a", "b"}, true},
 		{[]any{"a", "b", "c"}, []any{"a", "d"}, false},
+		{"Hello, World!", []any{"Hello", "World"}, true},
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
@@ -269,7 +273,7 @@ func TestContainsAll(t *testing.T) {
 
 func TestContainsAny(t *testing.T) {
 	tests := []struct {
-		a    []any
+		a    any
 		b    []any
 		pass bool
 	}{
@@ -279,6 +283,7 @@ func TestContainsAny(t *testing.T) {
 		{[]any{"a", "b", "c"}, []any{"a", "b"}, true},
 		{[]any{"a", "b", "c"}, []any{"a", "d"}, true},
 		{[]any{"a", "b", "c"}, []any{"d", "e"}, false},
+		{"Hello, World!", []any{"Hello", "World", "XXX"}, true},
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
@@ -291,7 +296,7 @@ func TestContainsAny(t *testing.T) {
 
 func TestContainsNone(t *testing.T) {
 	tests := []struct {
-		a    []any
+		a    any
 		b    []any
 		pass bool
 	}{
@@ -306,6 +311,42 @@ func TestContainsNone(t *testing.T) {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			if assert.ContainsNone(test.a, test.b) != test.pass {
 				fail(t, fmt.Sprintf("ContainsNone(%v, %v) != %v", test.a, test.b, test.pass))
+			}
+		})
+	}
+}
+
+func TestUppercase(t *testing.T) {
+	tests := []struct {
+		a    string
+		pass bool
+	}{
+		{"ABC", true},
+		{"abc", false},
+		{"Abc", false},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.Uppercase(test.a) != test.pass {
+				fail(t, fmt.Sprintf("Uppercase(%v) != %v", test.a, test.pass))
+			}
+		})
+	}
+}
+
+func TestLowercase(t *testing.T) {
+	tests := []struct {
+		a    string
+		pass bool
+	}{
+		{"ABC", false},
+		{"abc", true},
+		{"Abc", false},
+	}
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if assert.Lowercase(test.a) != test.pass {
+				fail(t, fmt.Sprintf("Lowercase(%v) != %v", test.a, test.pass))
 			}
 		})
 	}
