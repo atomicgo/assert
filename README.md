@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/atomicgo/assert">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-101-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-129-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://opensource.org/licenses/MIT" target="_blank">
@@ -73,6 +73,10 @@ Package assert provides a set of assertion functions.
 
 ## Index
 
+- [func Contains[T any](s []T, v T) bool](<#func-contains>)
+- [func ContainsAll[T any](s []T, v []T) bool](<#func-containsall>)
+- [func ContainsAny[T any](s []T, v []T) bool](<#func-containsany>)
+- [func ContainsNone[T any](s []T, v []T) bool](<#func-containsnone>)
 - [func Equal[T any](a, b T) bool](<#func-equal>)
 - [func False(a bool) bool](<#func-false>)
 - [func Implements(a, iface any) bool](<#func-implements>)
@@ -81,8 +85,41 @@ Package assert provides a set of assertion functions.
 - [func Number(a any) bool](<#func-number>)
 - [func Panic(f func()) (panicked bool)](<#func-panic>)
 - [func True(a bool) bool](<#func-true>)
+- [func Unique[T any](s []T) bool](<#func-unique>)
 - [func Zero(a any) bool](<#func-zero>)
 
+
+## func [Contains](<https://github.com/atomicgo/assert/blob/main/assert.go#L101>)
+
+```go
+func Contains[T any](s []T, v T) bool
+```
+
+Contains returns true if the slice contains the value. Items are considered equal if they are deep equal.
+
+## func [ContainsAll](<https://github.com/atomicgo/assert/blob/main/assert.go#L114>)
+
+```go
+func ContainsAll[T any](s []T, v []T) bool
+```
+
+ContainsAll returns true if the slice contains all the values. Items are considered equal if they are deep equal.
+
+## func [ContainsAny](<https://github.com/atomicgo/assert/blob/main/assert.go#L134>)
+
+```go
+func ContainsAny[T any](s []T, v []T) bool
+```
+
+ContainsAny returns true if the slice contains any of the values. Items are considered equal if they are deep equal.
+
+## func [ContainsNone](<https://github.com/atomicgo/assert/blob/main/assert.go#L149>)
+
+```go
+func ContainsNone[T any](s []T, v []T) bool
+```
+
+ContainsNone returns true if the slice contains none of the values. Items are considered equal if they are deep equal.
 
 ## func [Equal](<https://github.com/atomicgo/assert/blob/main/assert.go#L6>)
 
@@ -147,6 +184,14 @@ func True(a bool) bool
 ```
 
 True returns true if the value is true.
+
+## func [Unique](<https://github.com/atomicgo/assert/blob/main/assert.go#L86>)
+
+```go
+func Unique[T any](s []T) bool
+```
+
+Unique returns true if the slice contains unique values. Items are considered unique if they are not deep equal.
 
 ## func [Zero](<https://github.com/atomicgo/assert/blob/main/assert.go#L55>)
 
