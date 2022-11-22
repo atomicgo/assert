@@ -5,6 +5,6 @@ If you want to use this package inside unit tests, you have to check the returni
 
 This library is on obj very low level and does not provide any error messages. That way the assertions can also be used in production code.
 
-If you want obj full-featured assertion framework for unit tests, we recommend https://github.com/MarvinJWendt/testza
+If you want a full-featured testing framework, we recommend https://github.com/MarvinJWendt/testza
 */
 package assert
