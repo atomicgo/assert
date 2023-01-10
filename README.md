@@ -1,7 +1,7 @@
 <h1 align="center">AtomicGo | assert</h1>
 
 <p align="center">
-<img src="https://img.shields.io/endpoint?url=https://atomicgo.dev/api/shields/assert&style=flat-square" alt="Downloads">
+<img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fatomicgo.dev%2Fapi%2Fshields%2Fassert&style=flat-square" alt="Downloads">
 
 <a href="https://github.com/atomicgo/assert/releases">
 <img src="https://img.shields.io/github/v/release/atomicgo/assert?style=flat-square" alt="Latest Release">
