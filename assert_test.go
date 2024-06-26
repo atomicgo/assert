@@ -156,6 +156,33 @@ func TestNumber(t *testing.T) {
 	}
 }
 
+func TestRange(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		a        int
+		min      int
+		max      int
+		expected bool
+	}{
+		{1, 0, 2, true},
+		{1, 1, 2, true},
+		{1, 0, 1, true},
+		{1, 2, 3, false},
+		{1, 2, 1, false},
+	}
+
+	for i, test := range tests {
+		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
+			if assert.Range(test.a, test.min, test.max) != test.expected {
+				fail(t, fmt.Sprintf("Range(%v, %v, %v) != %v", test.a, test.min, test.max, test.expected))
+			}
+		})
+	}
+}
+
 func TestZero(t *testing.T) {
 	t.Parallel()
 
