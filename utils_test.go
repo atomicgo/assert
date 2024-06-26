@@ -2,8 +2,8 @@ package assert_test
 
 type person struct {
 	Name    string
-	Hobbies []hobby
 	Age     int
+	Hobbies []hobby
 }
 
 type hobby struct {
