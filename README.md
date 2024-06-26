@@ -16,7 +16,7 @@
 </a>
 
 <a href="https://codecov.io/gh/atomicgo/assert">
-<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-162-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
+<!-- unittestcount:start --><img src="https://img.shields.io/badge/Unit_Tests-0-magenta?style=flat-square" alt="Unit test count"><!-- unittestcount:end -->
 </a>
 
 <a href="https://opensource.org/licenses/MIT" target="_blank">
