@@ -96,7 +96,7 @@ If you want a full\-featured testing framework, we recommend https://github.com/
 
 
 <a name="Contains"></a>
-## func [Contains](<https://github.com/atomicgo/assert/blob/main/assert.go#L94>)
+## func [Contains](<https://github.com/atomicgo/assert/blob/main/assert.go#L100>)
 
 ```go
 func Contains(a any, b any) bool
@@ -105,7 +105,7 @@ func Contains(a any, b any) bool
 Contains returns true if obj contains expectedLen.
 
 <a name="ContainsAll"></a>
-## func [ContainsAll](<https://github.com/atomicgo/assert/blob/main/assert.go#L114>)
+## func [ContainsAll](<https://github.com/atomicgo/assert/blob/main/assert.go#L120>)
 
 ```go
 func ContainsAll[T any](a T, v []T) bool
@@ -114,7 +114,7 @@ func ContainsAll[T any](a T, v []T) bool
 ContainsAll returns true if all values are contained in obj.
 
 <a name="ContainsAny"></a>
-## func [ContainsAny](<https://github.com/atomicgo/assert/blob/main/assert.go#L125>)
+## func [ContainsAny](<https://github.com/atomicgo/assert/blob/main/assert.go#L131>)
 
 ```go
 func ContainsAny[T any](a T, v []T) bool
@@ -123,7 +123,7 @@ func ContainsAny[T any](a T, v []T) bool
 ContainsAny returns true if any of the values are contained in obj.
 
 <a name="ContainsNone"></a>
-## func [ContainsNone](<https://github.com/atomicgo/assert/blob/main/assert.go#L136>)
+## func [ContainsNone](<https://github.com/atomicgo/assert/blob/main/assert.go#L142>)
 
 ```go
 func ContainsNone[T any](a T, v []T) bool
@@ -141,7 +141,7 @@ func Equal[T any](a, b T) bool
 Equal compares two values and returns true if they are equal.
 
 <a name="Implements"></a>
-## func [Implements](<https://github.com/atomicgo/assert/blob/main/assert.go#L54>)
+## func [Implements](<https://github.com/atomicgo/assert/blob/main/assert.go#L57>)
 
 ```go
 func Implements(a, iface any) bool
@@ -159,7 +159,7 @@ func Kind(a any, kind reflect.Kind) bool
 Kind returns true if the value is of the given kind.
 
 <a name="Len"></a>
-## func [Len](<https://github.com/atomicgo/assert/blob/main/assert.go#L162>)
+## func [Len](<https://github.com/atomicgo/assert/blob/main/assert.go#L168>)
 
 ```go
 func Len(a any, length int) (b bool)
@@ -168,7 +168,7 @@ func Len(a any, length int) (b bool)
 Len returns true if the length of the value is equal to the given length.
 
 <a name="Lowercase"></a>
-## func [Lowercase](<https://github.com/atomicgo/assert/blob/main/assert.go#L152>)
+## func [Lowercase](<https://github.com/atomicgo/assert/blob/main/assert.go#L158>)
 
 ```go
 func Lowercase(s string) bool
@@ -186,7 +186,7 @@ func Nil(a any) bool
 Nil returns true if the value is nil.
 
 <a name="Number"></a>
-## func [Number](<https://github.com/atomicgo/assert/blob/main/assert.go#L34>)
+## func [Number](<https://github.com/atomicgo/assert/blob/main/assert.go#L35>)
 
 ```go
 func Number(a any) bool
@@ -195,7 +195,7 @@ func Number(a any) bool
 Number returns true if the value is obj number.
 
 <a name="Panic"></a>
-## func [Panic](<https://github.com/atomicgo/assert/blob/main/assert.go#L68>)
+## func [Panic](<https://github.com/atomicgo/assert/blob/main/assert.go#L72>)
 
 ```go
 func Panic(f func()) (panicked bool)
@@ -204,7 +204,7 @@ func Panic(f func()) (panicked bool)
 Panic returns true if the function panics.
 
 <a name="Regex"></a>
-## func [Regex](<https://github.com/atomicgo/assert/blob/main/assert.go#L157>)
+## func [Regex](<https://github.com/atomicgo/assert/blob/main/assert.go#L163>)
 
 ```go
 func Regex(regex, s string) bool
@@ -213,7 +213,7 @@ func Regex(regex, s string) bool
 Regex returns true if the string matches the regex.
 
 <a name="Unique"></a>
-## func [Unique](<https://github.com/atomicgo/assert/blob/main/assert.go#L80>)
+## func [Unique](<https://github.com/atomicgo/assert/blob/main/assert.go#L85>)
 
 ```go
 func Unique[T any](s []T) bool
@@ -222,7 +222,7 @@ func Unique[T any](s []T) bool
 Unique returns true if the slice contains unique values. Items are considered unique if they are not deep equal.
 
 <a name="Uppercase"></a>
-## func [Uppercase](<https://github.com/atomicgo/assert/blob/main/assert.go#L147>)
+## func [Uppercase](<https://github.com/atomicgo/assert/blob/main/assert.go#L153>)
 
 ```go
 func Uppercase(s string) bool
@@ -231,7 +231,7 @@ func Uppercase(s string) bool
 Uppercase returns true if the string is uppercase.
 
 <a name="Zero"></a>
-## func [Zero](<https://github.com/atomicgo/assert/blob/main/assert.go#L49>)
+## func [Zero](<https://github.com/atomicgo/assert/blob/main/assert.go#L52>)
 
 ```go
 func Zero(a any) bool
