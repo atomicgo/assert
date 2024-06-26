@@ -48,6 +48,9 @@ func Number(a any) bool {
 	}
 }
 
+// Range returns true if the value is within the range.
+func Range[T ]
+
 // Zero returns true if the value is the zero value.
 func Zero(a any) bool {
 	return a == nil || reflect.DeepEqual(a, reflect.Zero(reflect.TypeOf(a)).Interface())
