@@ -16,6 +16,8 @@ func fail(t *testing.T, msg string) {
 }
 
 func TestEqual(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a, b  any
 		equal bool
@@ -36,6 +38,8 @@ func TestEqual(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Equal(test.a, test.b) != test.equal {
 				fail(t, fmt.Sprintf("Equal(%v, %v) != %v", test.a, test.b, test.equal))
 			}
@@ -44,6 +48,8 @@ func TestEqual(t *testing.T) {
 }
 
 func TestIsKind(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    any
 		kind reflect.Kind
@@ -76,12 +82,16 @@ func TestIsKind(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			assert.Kind(test.a, test.kind)
 		})
 	}
 }
 
 func TestIsNil(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a     any
 		isNil bool
@@ -97,6 +107,8 @@ func TestIsNil(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Nil(test.a) != test.isNil {
 				fail(t, fmt.Sprintf("Nil(%v) != %v", test.a, test.isNil))
 			}
@@ -105,6 +117,8 @@ func TestIsNil(t *testing.T) {
 }
 
 func TestNumber(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a        any
 		isNumber bool
@@ -133,6 +147,8 @@ func TestNumber(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Number(test.a) != test.isNumber {
 				fail(t, fmt.Sprintf("Number(%v) != %v", test.a, test.isNumber))
 			}
@@ -141,6 +157,8 @@ func TestNumber(t *testing.T) {
 }
 
 func TestZero(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    any
 		pass bool
@@ -162,6 +180,8 @@ func TestZero(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Zero(test.a) != test.pass {
 				fail(t, fmt.Sprintf("Zero(%v) != %v", test.a, test.pass))
 			}
@@ -170,6 +190,8 @@ func TestZero(t *testing.T) {
 }
 
 func TestImplements(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    any
 		i    interface{}
@@ -183,6 +205,8 @@ func TestImplements(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Implements(test.a, test.i) != test.pass {
 				fail(t, fmt.Sprintf("Implements(%v, %v) != %v", test.a, test.i, test.pass))
 			}
@@ -191,6 +215,8 @@ func TestImplements(t *testing.T) {
 }
 
 func TestPanic(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		f    func()
 		pass bool
@@ -200,6 +226,8 @@ func TestPanic(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Panic(test.f) != test.pass {
 				fail(t, fmt.Sprintf("Function of %d should not panic", i))
 			}
@@ -208,18 +236,23 @@ func TestPanic(t *testing.T) {
 }
 
 func TestUnique(t *testing.T) {
-	p1 := person{"John", 20, []hobby{{"Guitar", "Music"}, {"Programming", "Tech"}}}
-	p2 := person{"John", 20, []hobby{{"Guitar", "Music"}, {"Programming", "Tech"}}}
+	t.Parallel()
+
+	person1 := person{"John", 20, []hobby{{"Guitar", "Music"}, {"Programming", "Tech"}}}
+	person2 := person{"John", 20, []hobby{{"Guitar", "Music"}, {"Programming", "Tech"}}}
+
 	tests := []struct {
 		a    []any
 		pass bool
 	}{
 		{[]any{1, 2, 3}, true},
 		{[]any{1, 2, 3, 1}, false},
-		{[]any{p1, p2}, false},
+		{[]any{person1, person2}, false},
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Unique(test.a) != test.pass {
 				fail(t, fmt.Sprintf("Unique(%v) != %v", test.a, test.pass))
 			}
@@ -228,6 +261,8 @@ func TestUnique(t *testing.T) {
 }
 
 func TestContains(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    any
 		b    any
@@ -243,6 +278,8 @@ func TestContains(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Contains(test.a, test.b) != test.pass {
 				fail(t, fmt.Sprintf("Contains(%v, %v) != %v", test.a, test.b, test.pass))
 			}
@@ -251,6 +288,8 @@ func TestContains(t *testing.T) {
 }
 
 func TestContainsAll(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    any
 		b    []any
@@ -264,6 +303,8 @@ func TestContainsAll(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.ContainsAll(test.a, test.b) != test.pass {
 				fail(t, fmt.Sprintf("ContainsAll(%v, %v) != %v", test.a, test.b, test.pass))
 			}
@@ -272,6 +313,8 @@ func TestContainsAll(t *testing.T) {
 }
 
 func TestContainsAny(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    any
 		b    []any
@@ -287,6 +330,8 @@ func TestContainsAny(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.ContainsAny(test.a, test.b) != test.pass {
 				fail(t, fmt.Sprintf("ContainsAny(%v, %v) != %v", test.a, test.b, test.pass))
 			}
@@ -295,6 +340,8 @@ func TestContainsAny(t *testing.T) {
 }
 
 func TestContainsNone(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    any
 		b    []any
@@ -309,6 +356,8 @@ func TestContainsNone(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.ContainsNone(test.a, test.b) != test.pass {
 				fail(t, fmt.Sprintf("ContainsNone(%v, %v) != %v", test.a, test.b, test.pass))
 			}
@@ -317,6 +366,8 @@ func TestContainsNone(t *testing.T) {
 }
 
 func TestUppercase(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    string
 		pass bool
@@ -327,6 +378,8 @@ func TestUppercase(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Uppercase(test.a) != test.pass {
 				fail(t, fmt.Sprintf("Uppercase(%v) != %v", test.a, test.pass))
 			}
@@ -335,6 +388,8 @@ func TestUppercase(t *testing.T) {
 }
 
 func TestLowercase(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		a    string
 		pass bool
@@ -345,6 +400,8 @@ func TestLowercase(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Lowercase(test.a) != test.pass {
 				fail(t, fmt.Sprintf("Lowercase(%v) != %v", test.a, test.pass))
 			}
@@ -353,6 +410,8 @@ func TestLowercase(t *testing.T) {
 }
 
 func TestRegex(t *testing.T) {
+	t.Parallel()
+
 	tests := []struct {
 		regex string
 		s     string
@@ -367,6 +426,8 @@ func TestRegex(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
+
 			if assert.Regex(test.regex, test.s) != test.pass {
 				fail(t, fmt.Sprintf("Regex(%v, %v) != %v", test.regex, test.s, test.pass))
 			}
@@ -375,6 +436,7 @@ func TestRegex(t *testing.T) {
 }
 
 func TestLen(t *testing.T) {
+	t.Parallel()
 	type test struct {
 		obj         any
 		expectedLen int
@@ -397,6 +459,7 @@ func TestLen(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			t.Parallel()
 			// parse test.obj to fit the constraint
 			if assert.Len(test.obj, test.expectedLen) != test.pass {
 				fail(t, fmt.Sprintf("Len(%v, %v) != %v", test.obj, test.expectedLen, test.pass))

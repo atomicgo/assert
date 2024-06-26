@@ -25,9 +25,10 @@ func Nil(a any) bool {
 	switch reflect.ValueOf(a).Kind() {
 	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
 		return reflect.ValueOf(a).IsNil()
-	}
 
-	return false
+	default:
+		return false
+	}
 }
 
 // Number returns true if the value is obj number.
@@ -41,8 +42,10 @@ func Number(a any) bool {
 		reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr,
 		reflect.Float32, reflect.Float64, reflect.Complex64, reflect.Complex128:
 		return true
+
+	default:
+		return false
 	}
-	return false
 }
 
 // Zero returns true if the value is the zero value.
@@ -57,6 +60,7 @@ func Implements(a, iface any) bool {
 	if a == nil {
 		return false
 	}
+
 	if !reflect.TypeOf(a).Implements(interfaceType) {
 		return false
 	}
@@ -72,6 +76,7 @@ func Panic(f func()) (panicked bool) {
 		}
 	}()
 	f()
+
 	return
 }
 
@@ -87,6 +92,7 @@ func Unique[T any](s []T) bool {
 			}
 		}
 	}
+
 	return true
 }
 
@@ -100,7 +106,7 @@ func Contains(a any, b any) bool {
 		return strings.Contains(objectValue.String(), reflect.ValueOf(b).String())
 	case reflect.Map:
 	default:
-		for i := 0; i < objectValue.Len(); i++ {
+		for i := range objectValue.Len() {
 			if Equal(objectValue.Index(i).Interface(), b) {
 				return true
 			}
@@ -160,11 +166,11 @@ func Regex(regex, s string) bool {
 
 // Len returns true if the length of the value is equal to the given length.
 func Len(a any, length int) (b bool) {
-	v := reflect.ValueOf(a)
+	value := reflect.ValueOf(a)
 
 	// Convert to element if pointer
-	if v.Kind() == reflect.Ptr {
-		v = v.Elem()
+	if value.Kind() == reflect.Ptr {
+		value = value.Elem()
 	}
 
 	defer func() {
@@ -173,7 +179,7 @@ func Len(a any, length int) (b bool) {
 		}
 	}()
 
-	b = v.Len() == length
+	b = value.Len() == length
 
 	return b
 }
