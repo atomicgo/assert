@@ -106,7 +106,7 @@ If you want a full\-featured testing framework, we recommend https://github.com/
 - [func Nil\(a any\) bool](<#Nil>)
 - [func Number\(a any\) bool](<#Number>)
 - [func Panic\(f func\(\)\) \(panicked bool\)](<#Panic>)
-- [func Range\[T constraints.Number\]\(a, min, max T\) bool](<#Range>)
+- [func Range\[T constraints.Number\]\(a, minimum, maximum T\) bool](<#Range>)
 - [func Regex\(regex, s string\) bool](<#Regex>)
 - [func Unique\[T any\]\(s \[\]T\) bool](<#Unique>)
 - [func Uppercase\(s string\) bool](<#Uppercase>)
@@ -225,7 +225,7 @@ Panic returns true if the function panics.
 ## func [Range](<https://github.com/atomicgo/assert/blob/main/assert.go#L54>)
 
 ```go
-func Range[T constraints.Number](a, min, max T) bool
+func Range[T constraints.Number](a, minimum, maximum T) bool
 ```
 
 Range returns true if the value is within the range.
