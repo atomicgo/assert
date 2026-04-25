@@ -82,6 +82,7 @@ func Panic(f func()) (panicked bool) {
 			panicked = true
 		}
 	}()
+
 	f()
 
 	return
